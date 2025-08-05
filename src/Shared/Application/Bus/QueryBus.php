@@ -2,13 +2,21 @@
 
 namespace App\Shared\Application\Bus;
 
-class QueryBus
+final readonly class QueryBus
 {
-    private array $handlers = [];
+    private array $handlers;
 
-    public function register(string $queryClass, callable $handler): void
+    public function __construct(iterable $queryHandlers)
     {
-        $this->handlers[$queryClass] = $handler;
+        $handlersMap = [];
+        foreach ($queryHandlers as $handler) {
+            $reflection = new \ReflectionMethod($handler, '__invoke');
+            $parameters = $reflection->getParameters();
+            $queryClass = $parameters[0]->getType()->getName();
+
+            $handlersMap[$queryClass] = $handler;
+        }
+        $this->handlers = $handlersMap;
     }
 
     public function handle(object $query): mixed

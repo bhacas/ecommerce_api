@@ -1,6 +1,9 @@
 controllers_user:
     resource: ../src/User/Interface/Http/Controller/
     type: attribute
+controllers_catalog:
+    resource: ../src/Catalog/Interface/Http/Controller/
+    type: attribute
 api_platform:
     resource: .
     prefix: /api

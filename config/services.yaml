@@ -11,15 +11,10 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Kernel.php'
 
-    App\Shared\Application\Bus\CommandBus:
-        calls:
-            - method: register
-              arguments:
-                  - App\User\Application\Command\LoginUserCommand
-                  - '@App\User\Application\Handler\LoginUserHandler'
     App\Shared\Application\Bus\QueryBus:
-        calls:
-            - method: register
-              arguments:
-                  - App\User\Application\Query\GetLoggedUserQuery
-                  - '@App\User\Application\Query\GetLoggedUserHandler'
+        arguments:
+            $queryHandlers: !tagged_iterator app.query_handler
+
+    _instanceof:
+        App\Shared\Application\Bus\QueryHandlerInterface:
+            tags: ['app.query_handler']

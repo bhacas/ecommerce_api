@@ -1,8 +1,7 @@
 <?php
 
-namespace App\User\Application\Handler;
+namespace App\User\Application\Command;
 
-use App\User\Application\Command\LoginUserCommand;
 use App\User\Domain\Repository\UserRepository;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;

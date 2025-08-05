@@ -2,7 +2,6 @@
 
 namespace App\Catalog\Domain\Model;
 
-use ApiPlatform\Metadata\ApiResource;
 use App\Catalog\Domain\Infrastructure\Doctrine\ProductRepository;
 use App\Shared\Domain\Model\Price;
 use Doctrine\DBAL\Types\Types;
@@ -10,12 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
-#[ApiResource]
 class Product
 {
     #[ORM\Id]
-    #[ORM\Column(type: 'uuid', unique: true)]
-    private Uuid $id;
+    #[ORM\Column(type: 'uuid')]
+    private Uuid $uuid;
 
     #[ORM\Column(length: 255)]
     private string $name;
@@ -31,15 +29,15 @@ class Product
 
     public function __construct(string $name, Price $price, int $stock)
     {
-        $this->id = Uuid::v7();
+        $this->uuid = Uuid::v7();
         $this->name = $name;
         $this->price = $price;
         $this->stock = $stock;
     }
 
-    public function getId(): Uuid
+    public function getUuid(): Uuid
     {
-        return $this->id;
+        return $this->uuid;
     }
 
     public function getName(): string

@@ -1,13 +1,15 @@
 <?php
 
-namespace App\User\Application\Query;
+namespace App\User\Application\QueryHandler;
 
+use App\Shared\Application\Bus\QueryHandlerInterface;
 use App\User\Application\Dto\UserDto;
+use App\User\Application\Query\GetLoggedUserQuery;
 use App\User\Domain\Repository\UserRepository;
 
-class GetLoggedUserHandler
+readonly class GetLoggedUserQueryHandler implements QueryHandlerInterface
 {
-    public function __construct(private readonly UserRepository $userRepository) {}
+    public function __construct(private UserRepository $userRepository) {}
 
     public function __invoke(GetLoggedUserQuery $query): UserDto
     {

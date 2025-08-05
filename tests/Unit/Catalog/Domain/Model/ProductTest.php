@@ -18,7 +18,7 @@ class ProductTest extends TestCase
         $product = new Product($productName, $price, $stock);
 
 
-        $this->assertInstanceOf(Uuid::class, $product->getId());
+        $this->assertInstanceOf(Uuid::class, $product->getUuid());
 
         $this->assertSame($productName, $product->getName());
 
