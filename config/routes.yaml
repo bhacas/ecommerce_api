@@ -1,5 +1,7 @@
-controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
+controllers_user:
+    resource: ../src/User/Interface/Http/Controller/
     type: attribute
+api_platform:
+    resource: .
+    prefix: /api
+    type: api_platform
