@@ -8,5 +8,6 @@ class UserDto
         public string $uuid,
         public string $email,
         public string $role,
-    ) {}
+    ) {
+    }
 }

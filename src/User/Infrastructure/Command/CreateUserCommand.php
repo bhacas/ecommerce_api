@@ -4,6 +4,7 @@ namespace App\User\Infrastructure\Command;
 
 use App\User\Domain\Model\User;
 use App\User\Domain\Repository\UserRepositoryInterface;
+use App\User\Infrastructure\Security\SymfonyUserAdapter;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -21,11 +22,10 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class CreateUserCommand extends Command
 {
     public function __construct(
-        private readonly UserRepositoryInterface     $userRepository,
+        private readonly UserRepositoryInterface $userRepository,
         private readonly UserPasswordHasherInterface $passwordHasher,
-        private readonly ValidatorInterface          $validator
-    )
-    {
+        private readonly ValidatorInterface $validator,
+    ) {
         parent::__construct();
     }
 
@@ -47,6 +47,7 @@ class CreateUserCommand extends Command
         $existingUser = $this->userRepository->findByEmail($email);
         if ($existingUser) {
             $io->error(sprintf('User with email "%s" already exists.', $email));
+
             return Command::FAILURE;
         }
 
@@ -60,12 +61,13 @@ class CreateUserCommand extends Command
 
         $errors = $this->validator->validate($user);
         if (count($errors) > 0) {
-            $io->error((string)$errors);
+            $io->error((string) $errors);
+
             return Command::FAILURE;
         }
 
         $hashedPassword = $this->passwordHasher->hashPassword(
-            $user,
+            new SymfonyUserAdapter($user),
             $plainPassword
         );
         $user->setPassword($hashedPassword);

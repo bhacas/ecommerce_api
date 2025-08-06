@@ -14,11 +14,10 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 readonly class GetUserTokenQueryHandler
 {
     public function __construct(
-        private UserRepositoryInterface     $userRepository,
+        private UserRepositoryInterface $userRepository,
         private UserPasswordHasherInterface $passwordHasher,
-        private JWTTokenManagerInterface    $jwtManager
-    )
-    {
+        private JWTTokenManagerInterface $jwtManager,
+    ) {
     }
 
     public function __invoke(GetUserTokenQuery $query): AuthTokenDto

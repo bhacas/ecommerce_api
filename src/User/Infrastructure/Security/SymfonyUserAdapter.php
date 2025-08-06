@@ -3,8 +3,8 @@
 namespace App\User\Infrastructure\Security;
 
 use App\User\Domain\Model\User;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class SymfonyUserAdapter implements UserInterface, PasswordAuthenticatedUserInterface
 {

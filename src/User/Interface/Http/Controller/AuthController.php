@@ -18,10 +18,9 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class AuthController extends AbstractController
 {
     public function __construct(
-        private readonly MessageBusInterface   $queryBus,
+        private readonly MessageBusInterface $queryBus,
         private readonly TokenStorageInterface $tokenStorage,
-    )
-    {
+    ) {
     }
 
     #[Route('/api/login', name: 'api_login', methods: ['POST'])]

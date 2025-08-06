@@ -13,6 +13,7 @@ readonly class GetUserTokenQuery
 
         #[Assert\NotBlank]
         #[Assert\Length(min: 6, max: 255)]
-        public string $password
-    ) {}
+        public string $password,
+    ) {
+    }
 }

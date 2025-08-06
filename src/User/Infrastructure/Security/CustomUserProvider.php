@@ -2,12 +2,11 @@
 
 namespace App\User\Infrastructure\Security;
 
-use App\User\Domain\Model\User;
 use App\User\Domain\Repository\UserRepositoryInterface;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 
 class CustomUserProvider implements UserProviderInterface
 {
@@ -41,6 +40,6 @@ class CustomUserProvider implements UserProviderInterface
 
     public function supportsClass(string $class): bool
     {
-        return $class === SymfonyUserAdapter::class || is_subclass_of($class, SymfonyUserAdapter::class);
+        return SymfonyUserAdapter::class === $class || is_subclass_of($class, SymfonyUserAdapter::class);
     }
 }

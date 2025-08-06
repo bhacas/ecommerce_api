@@ -15,9 +15,8 @@ use Symfony\Component\Routing\Annotation\Route;
 final class GetProduct extends AbstractController
 {
     public function __construct(
-        private readonly MessageBusInterface $queryBus
-    )
-    {
+        private readonly MessageBusInterface $queryBus,
+    ) {
     }
 
     #[Route('/api/products/{id}', name: 'api_get_product', methods: ['GET'])]

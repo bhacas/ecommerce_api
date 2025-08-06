@@ -6,7 +6,6 @@ use App\Catalog\Application\DTO\ProductView;
 use App\Catalog\Domain\Repository\ProductRepositoryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
-use Symfony\Component\Uid\Uuid;
 
 #[AsMessageHandler]
 final class GetProductQueryHandler

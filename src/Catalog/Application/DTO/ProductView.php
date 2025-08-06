@@ -3,7 +3,6 @@
 namespace App\Catalog\Application\DTO;
 
 use App\Catalog\Domain\Model\Product;
-use Symfony\Component\Uid\Uuid;
 
 final class ProductView
 {

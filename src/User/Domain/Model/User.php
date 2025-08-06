@@ -48,4 +48,9 @@ class User
     {
         return $this->password;
     }
+
+    public function setPassword(string $hashedPassword): void
+    {
+        $this->password = $hashedPassword;
+    }
 }

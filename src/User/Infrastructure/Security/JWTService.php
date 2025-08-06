@@ -8,8 +8,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 readonly class JWTService
 {
     public function __construct(
-        private JWTTokenManagerInterface $jwtManager
-    ) {}
+        private JWTTokenManagerInterface $jwtManager,
+    ) {
+    }
 
     public function createToken(UserInterface $user): string
     {

@@ -101,10 +101,12 @@
         }
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.85",
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-doctrine": "^2.0",
         "phpstan/phpstan-symfony": "^2.0",
         "phpunit/phpunit": "^12.3",
+        "squizlabs/php_codesniffer": "^3.13",
         "symfony/browser-kit": "7.3.*",
         "symfony/css-selector": "7.3.*",
         "symfony/debug-bundle": "7.3.*",

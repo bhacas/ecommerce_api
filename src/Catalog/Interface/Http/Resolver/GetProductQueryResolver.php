@@ -12,7 +12,7 @@ class GetProductQueryResolver implements ValueResolverInterface
 {
     public function supports(Request $request, ArgumentMetadata $argument): bool
     {
-        return $argument->getType() === GetProductQuery::class;
+        return GetProductQuery::class === $argument->getType();
     }
 
     public function resolve(Request $request, ArgumentMetadata $argument): iterable

@@ -9,7 +9,9 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 #[AsMessageHandler]
 readonly class GetLoggedUserQueryHandler
 {
-    public function __construct(private UserRepositoryInterface $userRepository) {}
+    public function __construct(private UserRepositoryInterface $userRepository)
+    {
+    }
 
     public function __invoke(GetLoggedUserQuery $query): UserDto
     {
@@ -18,7 +20,7 @@ readonly class GetLoggedUserQueryHandler
         return new UserDto(
             uuid: $user->uuid()->toString(),
             email: $user->email(),
-            role: method_exists($user, 'roles') ? implode(',' , $user->roles()) : 'ROLE_USER'
+            role: method_exists($user, 'roles') ? implode(',', $user->roles()) : 'ROLE_USER'
         );
     }
 }
