@@ -11,10 +11,3 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Kernel.php'
 
-    App\Shared\Application\Bus\QueryBus:
-        arguments:
-            $queryHandlers: !tagged_iterator app.query_handler
-
-    _instanceof:
-        App\Shared\Application\Bus\QueryHandlerInterface:
-            tags: ['app.query_handler']

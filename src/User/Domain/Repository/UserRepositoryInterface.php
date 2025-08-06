@@ -5,7 +5,7 @@ namespace App\User\Domain\Repository;
 use App\User\Domain\Model\User;
 use Symfony\Component\Uid\Uuid;
 
-interface UserRepository
+interface UserRepositoryInterface
 {
     public function findByEmail(string $email): ?User;
 

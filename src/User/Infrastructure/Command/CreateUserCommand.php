@@ -3,7 +3,7 @@
 namespace App\User\Infrastructure\Command;
 
 use App\User\Domain\Model\User;
-use App\User\Domain\Repository\UserRepository;
+use App\User\Domain\Repository\UserRepositoryInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class CreateUserCommand extends Command
 {
     public function __construct(
-        private readonly UserRepository              $userRepository,
+        private readonly UserRepositoryInterface     $userRepository,
         private readonly UserPasswordHasherInterface $passwordHasher,
         private readonly ValidatorInterface          $validator
     )

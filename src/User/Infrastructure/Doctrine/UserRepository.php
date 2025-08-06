@@ -6,7 +6,7 @@ use App\User\Domain\Model\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Uid\Uuid;
-use App\User\Domain\Repository\UserRepository as UserRepositoryInterface;
+use App\User\Domain\Repository\UserRepositoryInterface as UserRepositoryInterface;
 
 class UserRepository extends ServiceEntityRepository implements UserRepositoryInterface
 {

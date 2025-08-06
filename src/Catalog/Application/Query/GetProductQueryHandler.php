@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Catalog\Application\QueryHandler;
+namespace App\Catalog\Application\Query;
 
 use App\Catalog\Application\DTO\ProductView;
-use App\Catalog\Application\Query\GetProductQuery;
 use App\Catalog\Domain\Repository\ProductRepositoryInterface;
-use App\Shared\Application\Bus\QueryHandlerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Uid\Uuid;
 
-final class GetProductQueryHandler implements QueryHandlerInterface
+#[AsMessageHandler]
+final class GetProductQueryHandler
 {
-    public function __construct(private ProductRepositoryInterface $productRepository)
+    public function __construct(private readonly ProductRepositoryInterface $productRepository)
     {
     }
 
     public function __invoke(GetProductQuery $query): ProductView
     {
-        $product = $this->productRepository->findByUuid(Uuid::fromString($query->uuid()));
+        $product = $this->productRepository->findByUuid($query->uuid());
 
         if (!$product) {
             throw new NotFoundHttpException('Product not found');

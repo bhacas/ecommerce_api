@@ -10,7 +10,7 @@ class GetProductQuery
     {
     }
 
-    public function uuid(): string
+    public function uuid(): Uuid
     {
         return $this->uuid;
     }

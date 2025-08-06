@@ -1,10 +1,10 @@
 <?php
 
-namespace App\User\Application\Command;
+namespace App\User\Application\Query;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-readonly class LoginUserCommand
+readonly class GetUserTokenQuery
 {
     public function __construct(
         #[Assert\NotBlank]

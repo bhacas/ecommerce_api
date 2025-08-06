@@ -1,12 +1,10 @@
 security:
     password_hashers:
-        App\User\Domain\Model\User: 'auto'
+        App\User\Infrastructure\Security\SymfonyUserAdapter: 'auto'
 
     providers:
         app_user_provider:
-            entity:
-                class: App\User\Domain\Model\User
-                property: email
+            id: App\User\Infrastructure\Security\CustomUserProvider
 
     firewalls:
         #dev:

@@ -3,33 +3,34 @@
 namespace App\Catalog\Interface\Http\Controller;
 
 use App\Catalog\Application\Query\GetProductQuery;
-use App\Shared\Application\Bus\QueryBus;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
+use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\HandledStamp;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Uid\Uuid;
 
 #[AsController]
-final class GetProduct
+final class GetProduct extends AbstractController
 {
     public function __construct(
-        private readonly QueryBus $queryBus,
-        private readonly SerializerInterface $serializer,
+        private readonly MessageBusInterface $queryBus
     )
     {
     }
 
     #[Route('/api/products/{id}', name: 'api_get_product', methods: ['GET'])]
-    public function __invoke(Request $request, string $id)
+    public function __invoke(GetProductQuery $query): JsonResponse
     {
-        $query = new GetProductQuery(Uuid::fromString($id));
-        $product = $this->queryBus->handle($query);
-        $data = $this->serializer->serialize($product, 'jsonld');
+        $envelope = $this->queryBus->dispatch($query);
 
-        return new JsonResponse($data, Response::HTTP_OK, [], true);
+        $productView = $envelope->last(HandledStamp::class)->getResult();
 
+        return $this->json(
+            $productView,
+            Response::HTTP_OK,
+            []
+        );
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Catalog\Domain\Model;
 
-use App\Catalog\Domain\Infrastructure\Doctrine\ProductRepository;
+use App\Catalog\Infrastructure\Doctrine\ProductRepository;
 use App\Shared\Domain\Model\Price;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;

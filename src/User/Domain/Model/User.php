@@ -2,16 +2,12 @@
 
 namespace App\User\Domain\Model;
 
-use ApiPlatform\Metadata\ApiResource;
 use App\User\Infrastructure\Doctrine\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Uid\Uuid;
 
-#[ApiResource]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User
 {
     #[ORM\Id]
     #[ORM\Column(type: 'uuid', unique: true)]
@@ -38,37 +34,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->roles;
     }
 
-    public function eraseCredentials(): void
-    {
-    }
-
-    public function getUserIdentifier(): string
-    {
-        return $this->email;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
     public function uuid(): Uuid
     {
         return $this->uuid;
     }
 
-    public function setRoles(array $roles): void
-    {
-        $this->roles = $roles;
-    }
-
-    public function setPassword(string $hashedPassword): void
-    {
-        $this->password = $hashedPassword;
-    }
-
-    public function getEmail(): string
+    public function email(): string
     {
         return $this->email;
+    }
+
+    public function roles(): array
+    {
+        return $this->roles;
+    }
+
+    public function password(): ?string
+    {
+        return $this->password;
     }
 }
