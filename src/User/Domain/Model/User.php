@@ -29,11 +29,6 @@ class User
         $this->roles = $roles;
     }
 
-    public function getRoles(): array
-    {
-        return $this->roles;
-    }
-
     public function uuid(): Uuid
     {
         return $this->uuid;
