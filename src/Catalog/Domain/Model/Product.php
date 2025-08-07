@@ -19,7 +19,7 @@ class Product
     private string $name;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $description = null;
+    private ?string $description;
 
     #[ORM\Embedded(class: Price::class, columnPrefix: false)]
     private Price $price;
@@ -27,12 +27,17 @@ class Product
     #[ORM\Column]
     private int $stock;
 
-    public function __construct(string $name, Price $price, int $stock)
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    private \DateTimeInterface $createdAt;
+
+    public function __construct(string $name, Price $price, int $stock, ?string $description = null)
     {
         $this->uuid = Uuid::v7();
         $this->name = $name;
         $this->price = $price;
         $this->stock = $stock;
+        $this->description = $description ?? null;
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getUuid(): Uuid
@@ -58,5 +63,10 @@ class Product
     public function getStock(): int
     {
         return $this->stock;
+    }
+
+    public function createdAt(): \DateTimeInterface
+    {
+        return $this->createdAt;
     }
 }

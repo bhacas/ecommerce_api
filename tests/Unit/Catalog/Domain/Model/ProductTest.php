@@ -14,8 +14,11 @@ class ProductTest extends TestCase
         $productName = 'Nowoczesna Klawiatura';
         $price = new Price(34999, 'PLN'); // 349.99 PLN
         $stock = 50;
+        $description =
+            'Ergonomiczna klawiatura mechaniczna z podświetleniem RGB i
+            programowalnymi klawiszami. Idealna do gier i pracy biurowej.';
 
-        $product = new Product($productName, $price, $stock);
+        $product = new Product($productName, $price, $stock, $description);
 
         $this->assertInstanceOf(Uuid::class, $product->getUuid());
 
@@ -27,6 +30,6 @@ class ProductTest extends TestCase
 
         $this->assertSame($stock, $product->getStock());
 
-        $this->assertNull($product->getDescription());
+        $this->assertSame($description, $product->getDescription());
     }
 }

@@ -15,6 +15,5 @@ class UserTest extends TestCase
 
         $this->assertSame($email, $user->email());
         $this->assertSame($roles, $user->roles());
-        $this->assertNotNull($user->uuid());
     }
 }

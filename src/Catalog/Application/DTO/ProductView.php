@@ -9,8 +9,11 @@ final class ProductView
     public string $id;
 
     public string $name;
+
     public ?string $description;
+
     public int $stock;
+
     public string $formattedPrice;
 
     public static function fromEntity(Product $product): self

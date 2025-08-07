@@ -24,7 +24,7 @@ readonly class GetUserTokenQueryHandler
     {
         $user = new SymfonyUserAdapter($this->userRepository->findByEmail($query->email));
 
-        if (!$user || !$this->passwordHasher->isPasswordValid($user, $query->password)) {
+        if (!$this->passwordHasher->isPasswordValid($user, $query->password)) {
             throw new AuthenticationException('Invalid credentials.');
         }
 
