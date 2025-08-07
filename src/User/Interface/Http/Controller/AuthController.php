@@ -40,7 +40,7 @@ class AuthController extends AbstractController
     {
         $user = $this->tokenStorage->getToken()?->getUser();
 
-        if (!$user || !\is_object($user)) {
+        if (!\is_object($user)) {
             return new JsonResponse(['error' => 'Unauthorized'], 401);
         }
 

@@ -28,10 +28,13 @@ class ProductRepository extends ServiceEntityRepository implements ProductReposi
     /**
      * @return Collection<int, Product>
      */
-    public function findAllAsCollection(): Collection
+    public function findAllOrdered(string $orderBy, string $orderDirection): Collection
     {
-        $productsArray = parent::findAll();
+        $qb = $this->createQueryBuilder('p')->orderBy('p.' . $orderBy, $orderDirection);
 
-        return new ArrayCollection($productsArray);
+        $query = $qb->getQuery();
+        $result = $query->getResult();
+
+        return new ArrayCollection($result);
     }
 }

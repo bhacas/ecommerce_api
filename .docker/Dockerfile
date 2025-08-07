@@ -51,6 +51,7 @@ RUN chmod +x /usr/bin/local-php-security-checker \
     && docker-php-ext-enable xdebug \
     && pecl install pcov-${PCOV_VERSION} \
     && docker-php-ext-enable pcov \
+    && docker-php-ext-enable pcov \
     && apk del --no-cache .build-deps \
     && rm -rf /tmp/*
 
@@ -74,6 +75,14 @@ RUN export APP_ENV=prod && \
     php -v
 
 RUN chown -R www-data var/
+
+FROM php-dev AS php-test
+
+WORKDIR /var/www/html
+COPY composer.json composer.lock ./
+COPY . .
+RUN chown -R www-data:www-data .
+RUN composer install --prefer-dist --no-progress --no-suggest
 
 FROM ${CONTAINER_PROXY}nginx:${NGINX_IMAGE_VERSION} AS nginx-generic
 
