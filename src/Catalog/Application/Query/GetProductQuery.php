@@ -4,9 +4,9 @@ namespace App\Catalog\Application\Query;
 
 use Symfony\Component\Uid\Uuid;
 
-class GetProductQuery
+readonly class GetProductQuery
 {
-    public function __construct(private readonly Uuid $uuid)
+    public function __construct(private Uuid $uuid)
     {
     }
 

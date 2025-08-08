@@ -10,14 +10,14 @@ use Symfony\Component\Uid\Uuid;
 
 class GetProductQueryResolver implements ValueResolverInterface
 {
-    public function supports(Request $request, ArgumentMetadata $argument): bool
-    {
-        return GetProductQuery::class === $argument->getType();
-    }
-
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
     {
+        if (GetProductQuery::class !== $argument->getType()) {
+            return [];
+        }
+
         $productId = $request->attributes->get('id');
+        $productId = '01987935-1ea9-728e-a9ba-ea21ba0ffec1';
 
         yield new GetProductQuery(Uuid::fromString($productId));
     }

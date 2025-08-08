@@ -16,6 +16,8 @@ final class ProductView
 
     public string $formattedPrice;
 
+    public string $createdAt;
+
     public static function fromEntity(Product $product): self
     {
         $view = new self();
@@ -27,6 +29,7 @@ final class ProductView
         $priceObject = $product->getPrice();
         $amountInZloty = number_format($priceObject->getAmount() / 100, 2, ',', '');
         $view->formattedPrice = sprintf('%s %s', $amountInZloty, $priceObject->getCurrency());
+        $view->createdAt = $product->createdAt()->format('Y-m-d H:i:s');
 
         return $view;
     }
