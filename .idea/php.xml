@@ -190,6 +190,7 @@
       <path value="$PROJECT_DIR$/vendor/react/stream" />
       <path value="$PROJECT_DIR$/vendor/react/child-process" />
       <path value="$PROJECT_DIR$/vendor/evenement/evenement" />
+      <path value="$PROJECT_DIR$/vendor/symfony/amqp-messenger" />
     </include_path>
   </component>
   <component name="PhpInterpreters">

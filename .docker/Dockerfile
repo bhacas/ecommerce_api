@@ -14,6 +14,8 @@ COPY --from=composer:2.2.7 /usr/bin/composer /usr/bin/composer
 RUN apk add --no-cache \
     autoconf g++ gcc libc-dev make pkgconf re2c \
     icu-dev \
+    rabbitmq-c \
+    rabbitmq-c-dev \
     && docker-php-ext-configure intl \
     && docker-php-ext-install -j$(nproc) \
         opcache \
@@ -22,9 +24,11 @@ RUN apk add --no-cache \
         pcntl \
         calendar \
     && pecl install apcu \
-    && docker-php-ext-enable apcu pcntl calendar \
+    && pecl install amqp \
+    && docker-php-ext-enable apcu pcntl calendar amqp \
     && apk del --no-cache \
         autoconf g++ gcc libc-dev make pkgconf re2c \
+        rabbitmq-c-dev \
     && rm -rf /tmp/*
 
 WORKDIR /var/www/html

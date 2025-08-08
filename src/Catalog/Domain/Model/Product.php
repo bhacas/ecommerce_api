@@ -40,6 +40,17 @@ class Product
         $this->createdAt = new \DateTimeImmutable();
     }
 
+    public static function create(
+        string $name,
+        int $price,
+        string $currency,
+        ?string $description,
+        int $initialStock
+    ): Product {
+        $priceObject = new Price($price, $currency);
+        return new self($name, $priceObject, $initialStock, $description);
+    }
+
     public function getUuid(): Uuid
     {
         return $this->uuid;
