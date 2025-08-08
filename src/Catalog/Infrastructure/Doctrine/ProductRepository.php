@@ -37,4 +37,10 @@ class ProductRepository extends ServiceEntityRepository implements ProductReposi
 
         return new ArrayCollection($result);
     }
+
+    public function save(Product $product): void
+    {
+        $this->getEntityManager()->persist($product);
+        $this->getEntityManager()->flush();
+    }
 }

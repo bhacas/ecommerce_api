@@ -14,4 +14,6 @@ interface ProductRepositoryInterface
      * @return Collection<int, Product>
      */
     public function findAllOrdered(string $orderBy, string $orderDirection): Collection;
+
+    public function save(Product $product);
 }
